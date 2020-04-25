@@ -75,7 +75,6 @@ public class NumberPartition {
         return residue(a, sol2);
     }
 
-    
 
     // Generates a random solution which is a list of 1's and -1's
     // So that we don't have to convert we use booleans where True == 1 and False == -1
