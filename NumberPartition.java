@@ -122,8 +122,7 @@ public class NumberPartition {
     private int[] randomNeighbor(int[] solution){
         int size = solution.length;
         int i = r.nextInt(size);
-        int j = r.nextInt(size);
-        
+        int j = r.nextInt(size);    
         if (this.STD){
             while (j == i){                   // ensure i and j are different
                 j = r.nextInt(size);
@@ -138,8 +137,7 @@ public class NumberPartition {
                 j = r.nextInt(size);
             }
             solution[i] = j;
-        }
-        
+        } 
         return solution;
     }
 }
