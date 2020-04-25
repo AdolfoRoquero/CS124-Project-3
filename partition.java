@@ -11,7 +11,9 @@ public class partition{
     public static void main(String args[]){
         long [] array = generateArray();
         System.out.println(KK(array));
-        System.out.println(Arrays.toString(generateArray()));
+        System.out.println("Reapeated Random STD " + repeatedRandomSTD(array));
+        System.out.println("hill Climbing STD " + hillClimbingSTD(array));
+        System.out.println("simulated Annealing STD " + simulatedAnnealingSTD(array));
 
     }
     
@@ -31,7 +33,7 @@ public class partition{
         return array[len-1];
     }
 
-    private static boolean[] repeatedRandomSTD(long[] a){
+    private static long repeatedRandomSTD(long[] a){
         boolean[] randS1 = randSTDsolution();
         for (int i = 0; i < max_iter; i++){
             boolean[] randS2 = randSTDsolution();
@@ -39,10 +41,10 @@ public class partition{
                 randS1 = randS2;
             }
         }
-        return randS1;
+        return residueSTD(a, randS1);
     }
 
-    private static boolean[] hillClimbingSTD(long[] a){
+    private static long hillClimbingSTD(long[] a){
         boolean[] sol = randSTDsolution();
         for (int i = 0; i < max_iter; i++){
             boolean[] neighbor = randomNeighborSTD(sol);
@@ -50,10 +52,10 @@ public class partition{
                 sol = neighbor;
             }
         }
-        return sol;
+        return residueSTD(a, sol);
     }
 
-    private static boolean[] simulatedAnnealingSTD(long[] a){
+    private static long simulatedAnnealingSTD(long[] a){
         boolean[] sol = randSTDsolution();
         boolean[] sol2 = sol.clone();
         for (int i = 0; i < max_iter; i++){
@@ -75,7 +77,7 @@ public class partition{
                 sol2 = sol;
             }
         }
-        return sol2;
+        return residueSTD(a, sol2);
     }
 
     // Generate random array of size size(100) with values in range
@@ -103,8 +105,8 @@ public class partition{
     }
 
     // Computes the residue for a given solution
-    private static int residueSTD(long[] array, boolean[] solution){
-        int residue = 0;
+    private static long residueSTD(long[] array, boolean[] solution){
+        long residue = 0;
         for (int i = 0; i < size; i++) {
             if (solution[i]){
                 residue += array[i];
@@ -117,10 +119,10 @@ public class partition{
     }
 
     private static boolean[] randomNeighborSTD(boolean[] solution){
-        int i = 1 + r.nextInt(size);
-        int j = 1 + r.nextInt(size);
+        int i = r.nextInt(size);
+        int j = r.nextInt(size);
         while (j == i){                   // ensure i and j are different
-            j = 1 + r.nextInt(size);
+            j = r.nextInt(size);
         }
         solution[i] = !solution[i];
         if (r.nextDouble() > 0.5){      // flip coin for swapping
