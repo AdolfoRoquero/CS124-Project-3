@@ -10,30 +10,11 @@ public class partition{
         // don't print anything extraneous when first input is 0
         try{
             long[] arr = fileToArray(args[2]);
-            NPSolver NPS = new NPSolver(arr, (args[1].length() == 2), MAX_ITER); // second arg -> pp
-            switch (args[1]){
-                case "0":
-                    System.out.println(NPSolver.KK(arr));
-                    break;
-                case "1":
-                case "11":
-                    System.out.println(NPS.repeatedRandom());
-                    break;
-                case "2":
-                case "12":
-                    System.out.println(NPS.hillClimbing());
-                    break;
-                case "3":
-                case "13":
-                    System.out.println(NPS.simulatedAnnealing());
-                    break;
-                default:
-                    System.out.println("Error in algorithm type");
-                    break;
-            }
+            NPSolver NPS = new NPSolver(arr, MAX_ITER); // second arg -> pp
+            System.out.println(NPS.compute(args[1]));
         }
-        catch(IOException e){
-            System.out.println(e.getMessage());
+        catch(IOException ex){
+            System.out.println(ex.getMessage());
         }
     }
 

@@ -5,23 +5,21 @@ class NPSolver{
     private Random r = new Random();
     private long[] _arr;
     private int _n;
-    private boolean _pp;
     private Solution _S;
     private long _res;
     private int _MAX_ITER;
 
-    public NPSolver(long[] arr, boolean pp, int MAX_ITER){
+    public NPSolver(long[] arr, int MAX_ITER){
         _arr = arr;
         _n = arr.length;
-        _pp = pp;
-        _S = (pp) ? new Prepartition(_n): new Standard(_n);
-        _res = _S.residue(_arr);
         _MAX_ITER = MAX_ITER;
     }
 
-    public long repeatedRandom(){
+    public long repeatedRandom(boolean pp){
+        _S = (pp) ? new Prepartition(_n): new Standard(_n);
+        _res = _S.residue(_arr);
         for (int i = 0; i < _MAX_ITER; i++){
-            Solution S = (_pp) ? new Prepartition(_n): new Standard(_n);
+            Solution S = (pp) ? new Prepartition(_n): new Standard(_n);
             long res = S.residue(_arr);
             if (res < _res){
                 _S = S;
@@ -31,7 +29,9 @@ class NPSolver{
         return _res;
     }
 
-    public long hillClimbing(){
+    public long hillClimbing(boolean pp){
+        _S = (pp) ? new Prepartition(_n): new Standard(_n);
+        _res = _S.residue(_arr);
         for (int i = 0; i < _MAX_ITER; i++){
             Solution S = _S.randomNeighbor();
             long res = S.residue(_arr);
@@ -43,7 +43,9 @@ class NPSolver{
         return _res;
     }
 
-    public long simulatedAnnealing(){
+    public long simulatedAnnealing(boolean pp){
+        _S = (pp) ? new Prepartition(_n): new Standard(_n);
+        _res = _S.residue(_arr);
         Solution S = _S.copy(); //S will move, _S will always be best solution found so far.
         long res = _res;
         for (int i = 0; i < _MAX_ITER; i++){
@@ -66,6 +68,26 @@ class NPSolver{
             }
         }
         return _res;
+    }
+
+    public long compute(String algorithm_type){
+        boolean pp = (algorithm_type.length() == 2);
+        switch (algorithm_type){
+            case "0":
+                return KK(_arr);
+            case "1":
+            case "11":
+                return repeatedRandom(pp);
+            case "2":
+            case "12":
+                return hillClimbing(pp);
+            case "3":
+            case "13":
+                return simulatedAnnealing(pp);
+            default:
+                System.out.println("Invalid algorithm type");
+                return 0;
+        }
     }
 
     private double T(int iter){
