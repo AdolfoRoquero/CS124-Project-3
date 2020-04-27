@@ -4,12 +4,13 @@ import java.io.IOException;
 
 public class partition{
     private static int ARRAY_SIZE = 100;
+    private static int MAX_ITER = 25000;
 
     public static void main(String[] args){
         // don't print anything extraneous when first input is 0
         try{
             long[] arr = fileToArray(args[2]);
-            NPSolver NPS = new NPSolver(arr, (args[1].length() == 2)); // second arg -> pp
+            NPSolver NPS = new NPSolver(arr, (args[1].length() == 2), MAX_ITER); // second arg -> pp
             switch (args[1]){
                 case "0":
                     System.out.println(NPSolver.KK(arr));

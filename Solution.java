@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.Random;
 
-public abstract class Solution{
+abstract class Solution{
     protected static Random r = new Random();
     protected int[] _arr;
     protected int _n;

@@ -1,25 +1,26 @@
 import java.util.Arrays;
 import java.util.Random;
 
-public class NPSolver{
-    private static int MAX_ITER = 25000;
+class NPSolver{
     private Random r = new Random();
     private long[] _arr;
     private int _n;
     private boolean _pp;
     private Solution _S;
     private long _res;
+    private int _MAX_ITER;
 
-    public NPSolver(long[] arr, boolean pp){
+    public NPSolver(long[] arr, boolean pp, int MAX_ITER){
         _arr = arr;
         _n = arr.length;
         _pp = pp;
         _S = (pp) ? new Prepartition(_n): new Standard(_n);
         _res = _S.residue(_arr);
+        _MAX_ITER = MAX_ITER;
     }
 
     public long repeatedRandom(){
-        for (int i = 0; i < MAX_ITER; i++){
+        for (int i = 0; i < _MAX_ITER; i++){
             Solution S = (_pp) ? new Prepartition(_n): new Standard(_n);
             long res = S.residue(_arr);
             if (res < _res){
@@ -31,7 +32,7 @@ public class NPSolver{
     }
 
     public long hillClimbing(){
-        for (int i = 0; i < MAX_ITER; i++){
+        for (int i = 0; i < _MAX_ITER; i++){
             Solution S = _S.randomNeighbor();
             long res = S.residue(_arr);
             if (res < _res){
@@ -45,7 +46,7 @@ public class NPSolver{
     public long simulatedAnnealing(){
         Solution S = _S.copy(); //S will move, _S will always be best solution found so far.
         long res = _res;
-        for (int i = 0; i < MAX_ITER; i++){
+        for (int i = 0; i < _MAX_ITER; i++){
             Solution S2 = S.randomNeighbor();
             long res2 = S2.residue(_arr);
             if (res2 < res){
