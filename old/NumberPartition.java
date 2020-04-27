@@ -12,7 +12,7 @@ public class NumberPartition {
     }
 
     public long KK(long[] a){
-        long[] array = a.clone();  
+        long[] array = a.clone();
         int len = array.length;
         for (int i = 1; i < len; i++){
             Arrays.sort(array);
@@ -37,7 +37,7 @@ public class NumberPartition {
         }
         return residue(a, randS1);
     }
-   
+
     public long hillClimbing(long[] a){
         int[] sol = randSolution(a.length);
         for (int i = 0; i < max_iter; i++){
@@ -81,7 +81,7 @@ public class NumberPartition {
     private int[] randSolution(int size){
         int[] array = new int[size];
         if(this.STD){
-            for (int i = 0; i < size; i++){          
+            for (int i = 0; i < size; i++){
                 array[i] = r.nextInt(2); // 0 represent -1 and 1 represents 1
             }
         }
@@ -121,7 +121,7 @@ public class NumberPartition {
     private int[] randomNeighbor(int[] solution){
         int size = solution.length;
         int i = r.nextInt(size);
-        int j = r.nextInt(size);    
+        int j = r.nextInt(size);
         if (this.STD){
             while (j == i){                   // ensure i and j are different
                 j = r.nextInt(size);
@@ -136,7 +136,7 @@ public class NumberPartition {
                 j = r.nextInt(size);
             }
             solution[i] = j;
-        } 
+        }
         return solution;
     }
 }
