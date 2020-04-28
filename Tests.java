@@ -1,7 +1,15 @@
 public class Tests{
     public static void main(String[] args){
-        testResidue();
-        testKK();
+        //testResidue();
+        //testKK();
+        testHeap();
+        
+        
+
+
+
+
+
     }
 
     private static void testResidue(){
@@ -80,4 +88,17 @@ public class Tests{
         assert(NPSolver.KK(arr7) == KK7);
     }
     // generate 100 64-bit integers.
+
+    public static void testHeap(){
+        long[] a = new long[]{30,100,4,1,0,0,80,4,7,7,7,7};
+        MaxHeap H = new MaxHeap(a.length);
+        for (int i = 0; i < a.length; i++){
+            H.insert(a[i]);
+        }
+        for (int i = 0; i < a.length; i++){
+            System.out.println("Max: " + H.extractMax()); //100
+        }
+        
+
+    }
 }

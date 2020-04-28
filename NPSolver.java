@@ -95,18 +95,20 @@ class NPSolver{
     }
 
     public static long KK(long[] a){
-        long[] arr = a.clone();
-        int len = arr.length;
+        int len = a.length;
+        MaxHeap H = new MaxHeap(len);
+        for (int i = 0; i < len; i++){
+            H.insert(a[i]);
+        }
         for (int i = 1; i < len; i++){
-            Arrays.sort(arr);
             // System.out.println("Pre");
             // System.out.println(Arrays.toString(array));
-            arr[len - 1] = Math.abs(arr[len - 1] - arr[len - 2]);
-            arr[len - 2] = 0;
+            H.insert(Math.abs(H.extractMax() - H.extractMax()));
+            H.insert(0);
             // System.out.println("Post");
             // System.out.println(Arrays.toString(array));
             // System.out.println();
         }
-        return arr[len-1];
+        return H.extractMax();
     }
 }
