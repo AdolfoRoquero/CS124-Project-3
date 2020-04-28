@@ -1,11 +1,10 @@
 import java.util.Arrays;
 
 class MaxHeap {
-
+    
     private int d;
     private int size;
     private long[] Heap;
-    
 
     public MaxHeap(int n) {
         d = 2;

@@ -101,13 +101,7 @@ class NPSolver{
             H.insert(a[i]);
         }
         for (int i = 1; i < len; i++){
-            // System.out.println("Pre");
-            // System.out.println(Arrays.toString(array));
             H.insert(Math.abs(H.extractMax() - H.extractMax()));
-            H.insert(0);
-            // System.out.println("Post");
-            // System.out.println(Arrays.toString(array));
-            // System.out.println();
         }
         return H.extractMax();
     }

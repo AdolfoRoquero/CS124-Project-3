@@ -4,6 +4,8 @@ public class Experiment{
     private static int _ARRAY_SIZE;
     private static int _NUM_TRIALS;
     private static int _MAX_ITER;
+    private static long _MAX_VAL = 1000000000000L;
+    private static long _MIN_VAL = 1L;
     private static String[] algorithm_types = {"0", "1", "2", "3", "11", "12", "13"};
 
     public static void main(String[] args){
@@ -33,7 +35,7 @@ public class Experiment{
         Random r = new Random();
         long[] arr = new long[n];
         for (int i = 0; i < n; i++){
-            arr[i] = r.nextLong();
+            arr[i] = _MIN_VAL + (long) (r.nextDouble() * (_MAX_VAL - _MIN_VAL));
         }
         return arr;
     }
